@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "DDLLSDKInner"
-  spec.version      = "6.7.9"
+  spec.version      = "6.7.9.1"
   spec.summary      = "Ad framework"
 
   # This description is used to generate tags and improve search results.
@@ -53,7 +53,7 @@ Pod::Spec.new do |spec|
   #  profile URL.
   #
 
-  spec.author             = { "ZhiZhen" => "https://gitcode.com/harvey520/DDLLSDK" }
+  spec.author             = { "ZhiZhen" => "https://github.com/GameGoingGZ/DDLLSDK" }
   # Or just: spec.author    = ""
   # spec.authors            = { "" => "" }
   # spec.social_media_url   = "https://twitter.com/"
@@ -79,7 +79,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://gitcode.com/harvey520/DDLLSDK.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/GameGoingGZ/DDLLSDK.git", :tag => "#{spec.version}" }
   # spec.swift_versions = "5.0"
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
