@@ -281,7 +281,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-@import AppLovinSDK;
 @import Foundation;
 @import ObjectiveC;
 @import UIKit;
@@ -561,47 +560,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 - (id <GVTRewarded> _Nullable)createRewardedFor:(NSString * _Nonnull)adUnit delegate:(id <GVTRewardedDelegate> _Nullable)delegate watermarkData:(NSData * _Nullable)watermarkData SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@protocol MAAdapterInitializationParameters;
-@class ALSdk;
-SWIFT_CLASS_NAMED("GVTAdMediationAdapter") SWIFT_AVAILABILITY(ios,introduced=13.0)
-@interface GVTAdMaxMediationAdapter : ALMediationAdapter
-@property (nonatomic, readonly, copy) NSString * _Nonnull thirdPartySdkName;
-@property (nonatomic, readonly, copy) NSString * _Nonnull adapterVersion;
-@property (nonatomic, readonly, copy) NSString * _Nonnull SDKVersion;
-- (void)initializeWithParameters:(id <MAAdapterInitializationParameters> _Nonnull)parameters completionHandler:(void (^ _Nonnull)(MAAdapterInitializationStatus, NSString * _Nullable))completionHandler;
-- (void)destroy;
-- (nonnull instancetype)initWithSdk:(ALSdk * _Nonnull)sdk OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=13.0) SWIFT_DEPRECATED_MSG("This API is deprecated and will be removed in a future SDK version. Please use `-[ALMediationAdapter init] instead.");
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@protocol MAAdapterResponseParameters;
-@protocol MANativeAdAdapterDelegate;
-SWIFT_AVAILABILITY(ios,introduced=13.0)
-@interface GVTAdMaxMediationAdapter (SWIFT_EXTENSION(DDLLSDK)) <MANativeAdAdapter>
-- (void)loadNativeAdForParameters:(id <MAAdapterResponseParameters> _Nonnull)parameters andNotify:(id <MANativeAdAdapterDelegate> _Nonnull)delegate;
-@end
-
-@protocol MASignalCollectionParameters;
-@protocol MASignalCollectionDelegate;
-SWIFT_AVAILABILITY(ios,introduced=13.0)
-@interface GVTAdMaxMediationAdapter (SWIFT_EXTENSION(DDLLSDK)) <MASignalProvider>
-- (void)collectSignalWithParameters:(id <MASignalCollectionParameters> _Nonnull)parameters andNotify:(id <MASignalCollectionDelegate> _Nonnull)delegate;
-@end
-
-@protocol MAInterstitialAdapterDelegate;
-SWIFT_AVAILABILITY(ios,introduced=13.0)
-@interface GVTAdMaxMediationAdapter (SWIFT_EXTENSION(DDLLSDK)) <MAInterstitialAdapter>
-- (void)loadInterstitialAdForParameters:(id <MAAdapterResponseParameters> _Nonnull)parameters andNotify:(id <MAInterstitialAdapterDelegate> _Nonnull)delegate;
-- (void)showInterstitialAdForParameters:(id <MAAdapterResponseParameters> _Nonnull)parameters andNotify:(id <MAInterstitialAdapterDelegate> _Nonnull)delegate;
-@end
-
-@protocol MARewardedAdapterDelegate;
-SWIFT_AVAILABILITY(ios,introduced=13.0)
-@interface GVTAdMaxMediationAdapter (SWIFT_EXTENSION(DDLLSDK)) <MARewardedAdapter>
-- (void)loadRewardedAdForParameters:(id <MAAdapterResponseParameters> _Nonnull)parameters andNotify:(id <MARewardedAdapterDelegate> _Nonnull)delegate;
-- (void)showRewardedAdForParameters:(id <MAAdapterResponseParameters> _Nonnull)parameters andNotify:(id <MARewardedAdapterDelegate> _Nonnull)delegate;
-@end
-
 /// GVT 配置类
 SWIFT_CLASS_NAMED("GVTConfig")
 @interface DDLLGVTConfig : NSObject
@@ -693,6 +651,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSStri
 + (NSArray<NSString *> * _Nonnull)supportAdTypes SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)activate;
 @end
 
 @protocol GVTNativeAssests;
