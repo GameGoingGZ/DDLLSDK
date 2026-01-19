@@ -1,0 +1,11 @@
+framework module DDLLSDK {
+  umbrella header "DDLLSDK.h"
+  export *
+
+  module * { export * }
+}
+
+module DDLLSDK.Swift {
+  header "DDLLSDK-Swift.h"
+  requires objc
+}

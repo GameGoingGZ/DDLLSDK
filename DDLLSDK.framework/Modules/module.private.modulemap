@@ -1,0 +1,12 @@
+//
+//  module.modulemap
+//  DDLLSDK
+//
+//  Created by @姚作潘(yaozuopan@zhizhengroup.com) on 2025/12/22.
+//
+
+module DDLLSDK.Internal {
+    umbrella header "DDLLSDK-Bridging-Header.h"
+    export *
+    module * { export * }
+}
