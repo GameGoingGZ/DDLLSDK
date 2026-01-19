@@ -32,8 +32,8 @@ git push origin : $1
 cd ../$SPECS
 git pull
 
-mkdir -p $MODULE/$1
-cp ../$MODULE/$MODULENAME.podspec $MODULE/$1/$MODULENAME.podspec
+mkdir -p $MODULENAME/$1
+cp ../$MODULE/$MODULENAME.podspec $MODULENAME/$1/$MODULENAME.podspec
 git add *
 git commit -m "$MODULE-$1"
 git push
