@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "DDLLSDKInner"
-  spec.version      = "6.7.9.2"
+  spec.version      = "6.7.9.3"
   spec.summary      = "Ad framework"
 
   # This description is used to generate tags and improve search results.
@@ -133,7 +133,7 @@ Pod::Spec.new do |spec|
 
   # spec.pod_target_xcconfig = { "VALID_ARCHS" => "x86_64 arm64" }
 
-  # spec.dependency "JSONKit", "> 1.4"
+  spec.dependency "AppLovinSDK", "13.3.1"
   # spec.dependency "Alamofire", ">= 4.9.1"
   # spec.dependency "KeychainAccess", ">= 4.1.0"
 
