@@ -133,7 +133,7 @@ Pod::Spec.new do |spec|
 
   # spec.pod_target_xcconfig = { "VALID_ARCHS" => "x86_64 arm64" }
 
-  spec.dependency "AppLovinSDK", "13.3.1"
+  # spec.dependency "AppLovinSDK", "13.3.1"
   # spec.dependency "Alamofire", ">= 4.9.1"
   # spec.dependency "KeychainAccess", ">= 4.1.0"
 
