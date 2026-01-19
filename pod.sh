@@ -14,7 +14,7 @@ SPECS='Specs'
 
 cp podspec.example $MODULENAME.podspec
 REPLACE=`sed "s/{v}/$1/g" $MODULENAME.podspec`
-echo "$REPLACE" > $MODULE.podspec
+echo "$REPLACE" > $MODULENAME.podspec
 
 # 打 tag
 # git add $MODULE.podspec
