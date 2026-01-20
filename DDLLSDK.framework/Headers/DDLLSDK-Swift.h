@@ -517,6 +517,49 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 - (void)initializeWithInitParams:(GVTInitParams * _Nonnull)initParams configs:(NSDictionary<NSString *, NSString *> * _Nonnull)configs completion:(void (^ _Nullable)(BOOL, NSError * _Nullable))completion SWIFT_AVAILABILITY(ios,introduced=13.0);
 @end
 
+@protocol GVTNativeDelegate;
+@class NSData;
+@protocol GVTNative;
+@protocol GVTInterstitialDelegate;
+@protocol GVTInterstitial;
+@protocol GVTRewardedDelegate;
+@protocol GVTRewarded;
+@interface GVTAdManager (SWIFT_EXTENSION(DDLLSDK))
+/// Creates a native ad
+/// \param adUnit ad unit id from GVT dashboard
+///
+/// \param delegate set delegate to listen to ad events
+///
+/// \param watermarkData optional data used to overlay a watermark on the ad
+///
+///
+/// returns:
+/// returns <code>GVTNative</code>ad  object with configured as native ad.
+- (id <GVTNative> _Nullable)createNativeAdFor:(NSString * _Nonnull)adUnit delegate:(id <GVTNativeDelegate> _Nullable)delegate watermarkData:(NSData * _Nullable)watermarkData SWIFT_WARN_UNUSED_RESULT;
+/// Creates a fullscreen interstitial ad.
+/// \param adUnit ad unit id from GVT dashboard
+///
+/// \param delegate set delegate to listen to ad events
+///
+/// \param watermarkData optional data used to overlay a watermark on the ad
+///
+///
+/// returns:
+/// returns <code>GVTInterstitial</code> skippable fullscreen ad object
+- (id <GVTInterstitial> _Nullable)createInterstitialFor:(NSString * _Nonnull)adUnit delegate:(id <GVTInterstitialDelegate> _Nullable)delegate watermarkData:(NSData * _Nullable)watermarkData SWIFT_WARN_UNUSED_RESULT;
+/// Creates a fullscreen rewarded ad.
+/// \param adUnit ad unit id from GVT dashboard
+///
+/// \param delegate set delegate to listen to ad events
+///
+/// \param watermarkData optional data used to overlay a watermark on the ad
+///
+///
+/// returns:
+/// returns <code>GVTRewardedInterstitial</code> not skippable fullscreen ad object
+- (id <GVTRewarded> _Nullable)createRewardedFor:(NSString * _Nonnull)adUnit delegate:(id <GVTRewardedDelegate> _Nullable)delegate watermarkData:(NSData * _Nullable)watermarkData SWIFT_WARN_UNUSED_RESULT;
+@end
+
 /// GVT 配置类
 SWIFT_CLASS_NAMED("GVTConfig")
 @interface DDLLGVTConfig : NSObject
@@ -577,7 +620,6 @@ SWIFT_CLASS("_TtC7DDLLSDK13GVTInitParams")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-@protocol GVTInterstitialDelegate;
 /// Fullscreen interstitial ad protocol.
 SWIFT_PROTOCOL("_TtP7DDLLSDK15GVTInterstitial_")
 @protocol GVTInterstitial <GVTFullscreenAd>
@@ -612,7 +654,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSStri
 - (void)activate;
 @end
 
-@protocol GVTNativeDelegate;
 @protocol GVTNativeAssests;
 SWIFT_PROTOCOL("_TtP7DDLLSDK9GVTNative_")
 @protocol GVTNative <GVTAd>
@@ -649,7 +690,6 @@ SWIFT_PROTOCOL("_TtP7DDLLSDK17GVTNativeDelegate_")
 - (void)didHandleImpressionWithAd:(id <GVTAd> _Nonnull)ad;
 @end
 
-@protocol GVTRewardedDelegate;
 /// Fullscreen rewarded interstitial ad protocol.
 SWIFT_PROTOCOL("_TtP7DDLLSDK11GVTRewarded_")
 @protocol GVTRewarded <GVTFullscreenAd>
