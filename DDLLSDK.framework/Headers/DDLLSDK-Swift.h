@@ -453,49 +453,6 @@ SWIFT_PROTOCOL("_TtP7DDLLSDK5GVTAd_")
 - (void)addExtraParameterWithKey:(NSString * _Nonnull)key value:(NSString * _Nonnull)value;
 @end
 
-@class UIViewController;
-SWIFT_CLASS("_TtC7DDLLSDK9GVTAdBase")
-@interface GVTAdBase : NSObject
-@property (nonatomic, strong) UIViewController * _Nullable fullscreenViewController;
-@property (nonatomic, readonly, copy) NSString * _Nonnull unitID;
-@property (nonatomic, readonly) float amount;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (void)addExtraParameterWithKey:(NSString * _Nonnull)key value:(NSString * _Nonnull)value;
-@end
-
-/// Common protocol to every fullscreen ad.
-SWIFT_PROTOCOL("_TtP7DDLLSDK15GVTFullscreenAd_")
-@protocol GVTFullscreenAd <GVTAd>
-/// Start showing ad after it was successfully loaded
-/// \param viewController view controller that presents the ad
-///
-- (void)showFrom:(UIViewController * _Nonnull)viewController;
-/// Start showing ad after it was successfully loaded
-/// \param viewController view controller that presents the ad
-///
-/// \param muted mute video on start
-///
-- (void)showFrom:(UIViewController * _Nonnull)viewController muted:(BOOL)muted;
-/// Fullscreen view controller
-/// note:
-/// This property is used to present fullscreen ads in SwiftUI
-///
-/// returns:
-/// Fullscreen ad view controller
-@property (nonatomic, readonly, strong) UIViewController * _Nullable fullscreenViewController;
-@end
-
-@interface GVTAdBase (SWIFT_EXTENSION(DDLLSDK)) <GVTFullscreenAd>
-- (void)showFrom:(UIViewController * _Nonnull)viewController;
-- (void)showFrom:(UIViewController * _Nonnull)viewController muted:(BOOL)muted;
-@end
-
-@interface GVTAdBase (SWIFT_EXTENSION(DDLLSDK)) <GVTAd>
-- (void)loadWithBidResponse:(NSString * _Nonnull)bidResponse;
-- (void)destroy;
-@property (nonatomic, readonly) BOOL isReady;
-@end
-
 SWIFT_CLASS("_TtC7DDLLSDK12GVTAdManager")
 @interface GVTAdManager : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) GVTAdManager * _Nonnull shared;)
@@ -585,6 +542,29 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DDLLGVTConfi
 - (double)defaultECPMWithCountry:(NSString * _Nonnull)code SWIFT_WARN_UNUSED_RESULT;
 @end
 
+@class UIViewController;
+/// Common protocol to every fullscreen ad.
+SWIFT_PROTOCOL("_TtP7DDLLSDK15GVTFullscreenAd_")
+@protocol GVTFullscreenAd <GVTAd>
+/// Start showing ad after it was successfully loaded
+/// \param viewController view controller that presents the ad
+///
+- (void)showFrom:(UIViewController * _Nonnull)viewController;
+/// Start showing ad after it was successfully loaded
+/// \param viewController view controller that presents the ad
+///
+/// \param muted mute video on start
+///
+- (void)showFrom:(UIViewController * _Nonnull)viewController muted:(BOOL)muted;
+/// Fullscreen view controller
+/// note:
+/// This property is used to present fullscreen ads in SwiftUI
+///
+/// returns:
+/// Fullscreen ad view controller
+@property (nonatomic, readonly, strong) UIViewController * _Nullable fullscreenViewController;
+@end
+
 /// Use this object to init GVTAdManager SDK
 SWIFT_CLASS("_TtC7DDLLSDK13GVTInitParams")
 @interface GVTInitParams : NSObject
@@ -625,17 +605,6 @@ SWIFT_PROTOCOL("_TtP7DDLLSDK15GVTInterstitial_")
 @protocol GVTInterstitial <GVTFullscreenAd>
 /// Set delegate to be notified of when your ad is ready and of other ad-related events.
 @property (nonatomic, strong) id <GVTInterstitialDelegate> _Nullable interstitialDelegate;
-@end
-
-SWIFT_CLASS("_TtC7DDLLSDK17GVTInterstitialAd")
-@interface GVTInterstitialAd : GVTAdBase
-@property (nonatomic, weak) id <GVTInterstitialDelegate> _Nullable interstitialDelegate;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@interface GVTInterstitialAd (SWIFT_EXTENSION(DDLLSDK)) <GVTInterstitial>
-- (void)destroy;
 @end
 
 /// Rewarded interstitial delegate protocol. Implement it to get notified interstitial ad events.
@@ -695,17 +664,6 @@ SWIFT_PROTOCOL("_TtP7DDLLSDK11GVTRewarded_")
 @protocol GVTRewarded <GVTFullscreenAd>
 /// Set delegate to be notified of when your ad is ready and of other ad-related events.
 @property (nonatomic, strong) id <GVTRewardedDelegate> _Nullable rewardedDelegate;
-@end
-
-SWIFT_CLASS("_TtC7DDLLSDK13GVTRewardedAd")
-@interface GVTRewardedAd : GVTAdBase
-@property (nonatomic, weak) id <GVTRewardedDelegate> _Nullable rewardedDelegate;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@interface GVTRewardedAd (SWIFT_EXTENSION(DDLLSDK)) <GVTRewarded>
-- (void)destroy;
 @end
 
 /// Rewarded interstitial delegate protocol. Implement it to get notified rewarded ad events.
