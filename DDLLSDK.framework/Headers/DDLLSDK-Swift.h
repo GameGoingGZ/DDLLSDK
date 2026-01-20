@@ -321,40 +321,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) DDLLAdEventConfig * _N
 @property (nonatomic, readonly) BOOL isEnable;
 @end
 
-@protocol GVTAd;
-/// Base  delegate protocol. Common events for every ad object
-SWIFT_PROTOCOL("_TtP7DDLLSDK14BaseAdDelegate_")
-@protocol BaseAdDelegate
-/// SDK calls this method when ad was successfully loaded
-/// \param ad ad object that was loaded
-///
-- (void)didLoadWithAd:(id <GVTAd> _Nonnull)ad;
-/// SDK calls this method when ad was not loaded for some reasons
-/// \param ad ad object that was loaded
-///
-/// \param error the reason of failing loading
-///
-- (void)failToLoadWithAd:(id <GVTAd> _Nonnull)ad with:(NSError * _Nullable)error;
-/// SDK calls this method when ad was shown on screen
-/// \param ad ad object that was shown
-///
-- (void)didShowWithAd:(id <GVTAd> _Nonnull)ad;
-/// SDK calls this method when ad fails to show for some reasons
-/// \param ad ad object that was not shown
-///
-/// \param error the reason of failing loading
-///
-- (void)failToShowWithAd:(id <GVTAd> _Nonnull)ad with:(NSError * _Nullable)error;
-/// SDK calls this method when ad was closed
-/// \param ad ad object that was closed
-///
-- (void)didHideWithAd:(id <GVTAd> _Nonnull)ad;
-/// SDK calls this method when user clicked on the ad
-/// \param ad ad object that was clicked
-///
-- (void)didClickOn:(id <GVTAd> _Nonnull)ad;
-@end
-
 SWIFT_CLASS("_TtC7DDLLSDK11DDLLRequest")
 @interface DDLLRequest : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -474,49 +440,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 - (void)initializeWithInitParams:(GVTInitParams * _Nonnull)initParams configs:(NSDictionary<NSString *, NSString *> * _Nonnull)configs completion:(void (^ _Nullable)(BOOL, NSError * _Nullable))completion SWIFT_AVAILABILITY(ios,introduced=13.0);
 @end
 
-@protocol GVTNativeDelegate;
-@class NSData;
-@protocol GVTNative;
-@protocol GVTInterstitialDelegate;
-@protocol GVTInterstitial;
-@protocol GVTRewardedDelegate;
-@protocol GVTRewarded;
-@interface GVTAdManager (SWIFT_EXTENSION(DDLLSDK))
-/// Creates a native ad
-/// \param adUnit ad unit id from GVT dashboard
-///
-/// \param delegate set delegate to listen to ad events
-///
-/// \param watermarkData optional data used to overlay a watermark on the ad
-///
-///
-/// returns:
-/// returns <code>GVTNative</code>ad  object with configured as native ad.
-- (id <GVTNative> _Nullable)createNativeAdFor:(NSString * _Nonnull)adUnit delegate:(id <GVTNativeDelegate> _Nullable)delegate watermarkData:(NSData * _Nullable)watermarkData SWIFT_WARN_UNUSED_RESULT;
-/// Creates a fullscreen interstitial ad.
-/// \param adUnit ad unit id from GVT dashboard
-///
-/// \param delegate set delegate to listen to ad events
-///
-/// \param watermarkData optional data used to overlay a watermark on the ad
-///
-///
-/// returns:
-/// returns <code>GVTInterstitial</code> skippable fullscreen ad object
-- (id <GVTInterstitial> _Nullable)createInterstitialFor:(NSString * _Nonnull)adUnit delegate:(id <GVTInterstitialDelegate> _Nullable)delegate watermarkData:(NSData * _Nullable)watermarkData SWIFT_WARN_UNUSED_RESULT;
-/// Creates a fullscreen rewarded ad.
-/// \param adUnit ad unit id from GVT dashboard
-///
-/// \param delegate set delegate to listen to ad events
-///
-/// \param watermarkData optional data used to overlay a watermark on the ad
-///
-///
-/// returns:
-/// returns <code>GVTRewardedInterstitial</code> not skippable fullscreen ad object
-- (id <GVTRewarded> _Nullable)createRewardedFor:(NSString * _Nonnull)adUnit delegate:(id <GVTRewardedDelegate> _Nullable)delegate watermarkData:(NSData * _Nullable)watermarkData SWIFT_WARN_UNUSED_RESULT;
-@end
-
 /// GVT 配置类
 SWIFT_CLASS_NAMED("GVTConfig")
 @interface DDLLGVTConfig : NSObject
@@ -540,29 +463,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DDLLGVTConfi
 - (double)rateWithCountry:(NSString * _Nonnull)code SWIFT_WARN_UNUSED_RESULT;
 /// 获取eCPM
 - (double)defaultECPMWithCountry:(NSString * _Nonnull)code SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class UIViewController;
-/// Common protocol to every fullscreen ad.
-SWIFT_PROTOCOL("_TtP7DDLLSDK15GVTFullscreenAd_")
-@protocol GVTFullscreenAd <GVTAd>
-/// Start showing ad after it was successfully loaded
-/// \param viewController view controller that presents the ad
-///
-- (void)showFrom:(UIViewController * _Nonnull)viewController;
-/// Start showing ad after it was successfully loaded
-/// \param viewController view controller that presents the ad
-///
-/// \param muted mute video on start
-///
-- (void)showFrom:(UIViewController * _Nonnull)viewController muted:(BOOL)muted;
-/// Fullscreen view controller
-/// note:
-/// This property is used to present fullscreen ads in SwiftUI
-///
-/// returns:
-/// Fullscreen ad view controller
-@property (nonatomic, readonly, strong) UIViewController * _Nullable fullscreenViewController;
 @end
 
 /// Use this object to init GVTAdManager SDK
@@ -600,18 +500,6 @@ SWIFT_CLASS("_TtC7DDLLSDK13GVTInitParams")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-/// Fullscreen interstitial ad protocol.
-SWIFT_PROTOCOL("_TtP7DDLLSDK15GVTInterstitial_")
-@protocol GVTInterstitial <GVTFullscreenAd>
-/// Set delegate to be notified of when your ad is ready and of other ad-related events.
-@property (nonatomic, strong) id <GVTInterstitialDelegate> _Nullable interstitialDelegate;
-@end
-
-/// Rewarded interstitial delegate protocol. Implement it to get notified interstitial ad events.
-SWIFT_PROTOCOL("_TtP7DDLLSDK23GVTInterstitialDelegate_")
-@protocol GVTInterstitialDelegate <BaseAdDelegate>
-@end
-
 SWIFT_CLASS("_TtC7DDLLSDK10GVTManager")
 @interface GVTManager : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) GVTManager * _Nonnull shared;)
@@ -621,68 +509,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSStri
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 - (void)activate;
-@end
-
-@protocol GVTNativeAssests;
-SWIFT_PROTOCOL("_TtP7DDLLSDK9GVTNative_")
-@protocol GVTNative <GVTAd>
-@property (nonatomic, strong) id <GVTNativeDelegate> _Nullable delegate;
-@property (nonatomic, readonly, strong) id <GVTNativeAssests> _Nullable assets;
-- (void)handleClick;
-- (void)handleImpression;
-@end
-
-@class UIImage;
-@class UIView;
-SWIFT_PROTOCOL("_TtP7DDLLSDK16GVTNativeAssests_")
-@protocol GVTNativeAssests
-@property (nonatomic, readonly, strong) UIImage * _Nullable appIcon;
-@property (nonatomic, readonly, strong) UIImage * _Nullable mainImage;
-@property (nonatomic, readonly, copy) NSString * _Nonnull title;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-@property (nonatomic, readonly, copy) NSString * _Nonnull sponsorText;
-@property (nonatomic, readonly, copy) NSString * _Nonnull ctaTitle;
-@property (nonatomic, readonly) double rating;
-@property (nonatomic, readonly, strong) UIView * _Nullable videoView;
-@end
-
-SWIFT_PROTOCOL("_TtP7DDLLSDK17GVTNativeDelegate_")
-@protocol GVTNativeDelegate <BaseAdDelegate>
-@optional
-/// SDK calls this method when Native ad click handle request is completed
-/// \param ad ad object for which click request was handled.
-///
-- (void)didHandleClickWithAd:(id <GVTAd> _Nonnull)ad;
-/// SDK calls this method when Native ad impression handle request is completed
-/// \param ad ad object for which impression request was handled.
-///
-- (void)didHandleImpressionWithAd:(id <GVTAd> _Nonnull)ad;
-@end
-
-/// Fullscreen rewarded interstitial ad protocol.
-SWIFT_PROTOCOL("_TtP7DDLLSDK11GVTRewarded_")
-@protocol GVTRewarded <GVTFullscreenAd>
-/// Set delegate to be notified of when your ad is ready and of other ad-related events.
-@property (nonatomic, strong) id <GVTRewardedDelegate> _Nullable rewardedDelegate;
-@end
-
-/// Rewarded interstitial delegate protocol. Implement it to get notified rewarded ad events.
-SWIFT_PROTOCOL("_TtP7DDLLSDK19GVTRewardedDelegate_")
-@protocol GVTRewardedDelegate <BaseAdDelegate>
-/// SDK calls this method when the user gets a reward.
-/// \param ad ad object that produce reward
-///
-- (void)userRewardedWithAd:(id <GVTAd> _Nonnull)ad;
-/// SDK calls this method when video starts.
-/// Optional, it can be not invoked.
-/// \param ad ad object that starts video.
-///
-- (void)rewardedVideoStartedWithAd:(id <GVTAd> _Nonnull)ad;
-/// SDK calls this method when the video has completed video playback.
-/// Optional, it can be not invoked.
-/// \param ad ad object that video reached the end.
-///
-- (void)rewardedVideoCompletedWithAd:(id <GVTAd> _Nonnull)ad;
 @end
 
 /// IDFA 权限申请
