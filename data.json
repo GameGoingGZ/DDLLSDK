@@ -6,11 +6,6 @@
     },
     {
         "name": "DDLLSDKInner",
-        "version": "6.8.5",
-        "bridge": "6.8.0"
-    },
-    {
-        "name": "DDLLSDKInner",
         "version": "6.8.8",
         "bridge": "6.8.0"
     },
