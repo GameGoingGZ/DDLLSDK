@@ -797,49 +797,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isReachable;)
 + (BOOL)isReachable SWIFT_WARN_UNUSED_RESULT;
 @end
 
-SWIFT_CLASS("_TtC7DDLLSDK12OpenAdConfig")
-@interface OpenAdConfig : NSObject
-/// 是否开启, 默认false
-@property (nonatomic, readonly) BOOL isEnable;
-/// 开屏用户终身成功展示上限，超过则不展示开屏,默认500
-@property (nonatomic, readonly) NSInteger limitValue;
-/// 开屏每日成功展示上限，超过则不展示开屏, 默认10
-@property (nonatomic, readonly) NSInteger dailyLimitValue;
-/// 冷启动等待时间(秒),默认15
-@property (nonatomic, readonly) float coldWaitTimeValue;
-/// 热启动等待时间(秒),默认1
-@property (nonatomic, readonly) float hotWaitTimeValue;
-/// 热启动间隔(秒),默认3
-/// 两次热启动时间小于配置值，则不进行热启动，直接进入游戏
-@property (nonatomic, readonly) float backTimeValue;
-/// 冷启动免费次数，默认1
-/// 配置值的冷启动次数内，不会展示开屏
-@property (nonatomic, readonly) NSInteger coldFreeCountValue;
-/// 冷启动请求等待(秒)，默认2
-@property (nonatomic, readonly) float coldStartRequestWaitTimeValue;
-/// 冷启动请求等待间隔(秒)，默认2
-@property (nonatomic, readonly) float coldRequestIntervalValue;
-/// 热启动请求等待(秒),默认0.5
-@property (nonatomic, readonly) float hotStartRequestWaitTimeValue;
-/// 热启动请求等待间隔(秒),默认0.1
-@property (nonatomic, readonly) float hotRequestIntervalValue;
-/// 玩家打开应用x秒后，预加载开屏，默认0
-/// 配置0为立刻预加载（该行为与冷启加载需独立区分）
-@property (nonatomic, readonly) NSInteger preloadintValue;
-/// 冷启开屏频次上限,默认8
-/// 玩家冷启开启触发的开屏限制在x次
-@property (nonatomic, readonly) NSInteger coldOpenAdLimitValue;
-/// 热启开屏频次上限，默认8
-/// 玩家热启开启触发的开屏限制在x次
-@property (nonatomic, readonly) NSInteger hotOpenAdLimitValue;
-/// 推送开屏频次上限,默认10次
-/// 玩家通过推送打开游戏触发开屏限制在x次
-@property (nonatomic, readonly) NSInteger pushopenLimitValue;
-/// 前后台切换间隔时间(秒)，默认5
-/// 热启动以后，若距离上次前台启动超过x秒才可触发开屏功能
-@property (nonatomic, readonly) NSInteger lastforetimeValue;
-@end
-
 SWIFT_CLASS_NAMED("PreGeneralConfig")
 @interface DDLLLPreGeneralConfig : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) DDLLLPreGeneralConfig * _Nonnull shared;)
@@ -918,6 +875,49 @@ SWIFT_CLASS_NAMED("SmartStateConfig")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 - (void)resetLastLoadedTime;
 + (DDLLSmartStateConfig * _Nonnull)fetch:(NSString * _Nonnull)adType adPlatform:(NSString * _Nonnull)adPlatform SWIFT_WARN_UNUSED_RESULT;
+@end
+
+SWIFT_CLASS("_TtC7DDLLSDK14SplashAdConfig")
+@interface SplashAdConfig : NSObject
+/// 是否开启, 默认false
+@property (nonatomic, readonly) BOOL isEnable;
+/// 开屏用户终身成功展示上限，超过则不展示开屏,默认500
+@property (nonatomic, readonly) NSInteger limitValue;
+/// 开屏每日成功展示上限，超过则不展示开屏, 默认10
+@property (nonatomic, readonly) NSInteger dailyLimitValue;
+/// 冷启动等待时间(秒),默认15
+@property (nonatomic, readonly) float coldWaitTimeValue;
+/// 热启动等待时间(秒),默认1
+@property (nonatomic, readonly) float hotWaitTimeValue;
+/// 热启动间隔(秒),默认3
+/// 两次热启动时间小于配置值，则不进行热启动，直接进入游戏
+@property (nonatomic, readonly) float backTimeValue;
+/// 冷启动免费次数，默认1
+/// 配置值的冷启动次数内，不会展示开屏
+@property (nonatomic, readonly) NSInteger coldFreeCountValue;
+/// 冷启动请求等待(秒)，默认2
+@property (nonatomic, readonly) float coldStartRequestWaitTimeValue;
+/// 冷启动请求等待间隔(秒)，默认2
+@property (nonatomic, readonly) float coldRequestIntervalValue;
+/// 热启动请求等待(秒),默认0.5
+@property (nonatomic, readonly) float hotStartRequestWaitTimeValue;
+/// 热启动请求等待间隔(秒),默认0.1
+@property (nonatomic, readonly) float hotRequestIntervalValue;
+/// 玩家打开应用x秒后，预加载开屏，默认0
+/// 配置0为立刻预加载（该行为与冷启加载需独立区分）
+@property (nonatomic, readonly) NSInteger preloadintValue;
+/// 冷启开屏频次上限,默认8
+/// 玩家冷启开启触发的开屏限制在x次
+@property (nonatomic, readonly) NSInteger coldOpenAdLimitValue;
+/// 热启开屏频次上限，默认8
+/// 玩家热启开启触发的开屏限制在x次
+@property (nonatomic, readonly) NSInteger hotOpenAdLimitValue;
+/// 推送开屏频次上限,默认10次
+/// 玩家通过推送打开游戏触发开屏限制在x次
+@property (nonatomic, readonly) NSInteger pushopenLimitValue;
+/// 前后台切换间隔时间(秒)，默认5
+/// 热启动以后，若距离上次前台启动超过x秒才可触发开屏功能
+@property (nonatomic, readonly) NSInteger lastforetimeValue;
 @end
 
 @class NSCoder;
