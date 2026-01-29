@@ -3,5 +3,10 @@
         "name": "DDLLSDKInner",
         "version": "6.8.0",
         "bridge": "6.8.0"
+    },
+    {
+        "name": "DDLLSDKInner",
+        "version": "6.9.0",
+        "bridge": "6.8.0"
     }
 ]
