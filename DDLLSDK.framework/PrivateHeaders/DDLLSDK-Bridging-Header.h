@@ -11,3 +11,7 @@
 #import "DDLLAnalytics.h"
 #import "DDLLAdEvent.h"
 #import "DDLLManagerTest.h"
+#import "DDLLAppsflyerAdapter.h"
+#import "DDLLAFConversionInfo.h"
+#import "DDLLIOSInfoHelper.h"
+#import "DDLLEncryptUtil.h"
