@@ -24,7 +24,7 @@ target '你的项目Target' do
 	pod 'FirebaseAnalytics', :modular_headers => true      # 必须
  	pod 'FirebaseCrashlytics', :modular_headers => true    # 必须
   pod 'AppsFlyerFramework','6.15.3'                      # 必须
-  pod 'DDLLSDK', '6.8.0'														     # 必须
+  pod 'DDLLSDK', '6.9.0'														     # 必须
   pod 'AppLovinSDK','13.3.1'                             # 必须
   pod 'AppLovinMediationBidMachineAdapter','3.3.0.0.2'   # 可选，BidMachine广告源
   pod 'AppLovinMediationBigoAdsAdapter','4.8.1.0'        # 可选，Bigo广告源
@@ -42,6 +42,7 @@ target '你的项目Target' do
   pod 'AppLovinMediationMolocoAdapter','4.1.2.0'            # 可选，moloco广告源
   pod 'AppLovinMediationChartboostAdapter','9.9.0.0'        # 可选，chartboost广告源
   pod 'AppLovinMediationInMobiAdapter','10.8.3.1'           # 可选，inmobi广告源
+  pod 'zMaticooMAXAdapter', '1.1.6'                         # 可选，zMaticoo
 end
 ```
 
